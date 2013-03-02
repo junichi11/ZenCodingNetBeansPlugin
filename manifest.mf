@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-OpenIDE-Module: org.lorenzos.zencoding
-OpenIDE-Module-Layer: org/lorenzos/zencoding/layer.xml
-OpenIDE-Module-Localizing-Bundle: org/lorenzos/zencoding/Bundle.properties
+OpenIDE-Module: org.lorenzos.emmet
+OpenIDE-Module-Layer: org/lorenzos/emmet/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/lorenzos/emmet/Bundle.properties
 OpenIDE-Module-Specification-Version: 1.0
 

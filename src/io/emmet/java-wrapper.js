@@ -169,15 +169,26 @@ function javaDetectProfile(editor) {
 }
 
 function nbTransformTabstops(text) {
-	var caretBase = 1000;
-	return require('tabStops').processText(text, {
+	var caretBase = 10000;
+	// in first iteration, replace all caret positions but
+	// remember the last one
+	text = require('tabStops').processText(text, {
 		tabstop: function(data) {
-			var group = data.group;
-			if (group == '0') {
-				group = caretBase++;
+			if (data.group == '0') {
+				return '${' + (++caretBase) + '}';
 			}
 
-			return '${' + group + ' default="' + (data.placeholder || '') + '"}';
+			return data.token;
+		}
+	});
+
+	return require('tabStops').processText(text, {
+		tabstop: function(data) {
+			if (data.group == caretBase) {
+				return '${cursor}';
+			}
+
+			return '${' + data.group + ' default="' + (data.placeholder || '') + '"}';
 		}
 	});
 }
