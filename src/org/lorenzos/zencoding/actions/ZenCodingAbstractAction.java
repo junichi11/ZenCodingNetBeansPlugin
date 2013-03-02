@@ -1,6 +1,7 @@
 
 package org.lorenzos.zencoding.actions;
 
+import io.emmet.Emmet;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ import org.lorenzos.utils.OutputUtils;
 import org.lorenzos.zencoding.zeneditor.ZenEditor;
 import org.openide.cookies.EditorCookie;
 import org.openide.text.NbDocument;
-import ru.zencoding.JSExecutor;
 
 public abstract class ZenCodingAbstractAction implements ActionListener {
 
@@ -34,14 +34,14 @@ public abstract class ZenCodingAbstractAction implements ActionListener {
 			try {
 
 				// Create JS executor and setup a Zen editor
-				final JSExecutor jsRunner = JSExecutor.getSingleton();
+				final Emmet emmet = Emmet.getSingleton();
 				final ZenEditor editor = ZenEditor.create(editorCookie);
 
 				// Create a runnable that run the Zen action
 				final String zenAction = this.action;
 				Runnable runZenAction = new Runnable() {
 					@Override public void run() {
-						jsRunner.runAction(editor, zenAction);
+						emmet.runAction(editor, zenAction);
 					}
 				};
 

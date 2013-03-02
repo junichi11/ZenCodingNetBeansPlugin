@@ -1,4 +1,5 @@
-package ru.zencoding;
+package io.emmet;
+
 
 public class SelectionData {
 	private int start = 0;

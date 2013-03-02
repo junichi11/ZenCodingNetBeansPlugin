@@ -1,6 +1,8 @@
 
 package org.lorenzos.zencoding.zeneditor;
 
+import io.emmet.Emmet;
+import io.emmet.IEmmetEditor;
 import java.awt.Rectangle;
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
@@ -13,12 +15,17 @@ import org.lorenzos.utils.EditorUtilities;
 import org.lorenzos.utils.OutputUtils;
 import org.netbeans.api.lexer.TokenHierarchy;
 import org.netbeans.api.lexer.TokenSequence;
+import org.netbeans.lib.editor.codetemplates.api.CodeTemplateManager;
 import org.netbeans.modules.editor.indent.api.IndentUtils;
 import org.openide.cookies.EditorCookie;
-import ru.zencoding.IZenEditor;
-import ru.zencoding.SelectionData;
+import io.emmet.SelectionData;
+import java.io.File;
+import org.netbeans.lib.editor.codetemplates.api.CodeTemplate;
+import org.mozilla.javascript.Context;
+import org.netbeans.modules.editor.NbEditorUtilities;
+import org.openide.filesystems.FileUtil;
 
-public class ZenEditor implements IZenEditor {
+public class ZenEditor implements IEmmetEditor {
 
 	private JTextComponent textComp;
 	private Document doc;
@@ -29,8 +36,6 @@ public class ZenEditor implements IZenEditor {
 	private int caretPosition;
 	private int lineStart;
 	private int lineEnd;
-
-	private final static String caretPlaceholder = "{%::zen-caret::%}";
 
 	private ZenEditor(JTextComponent textComp) throws ZenEditorException {
 		this.textComp = textComp;
@@ -101,10 +106,16 @@ public class ZenEditor implements IZenEditor {
 
 	@Override
 	public void replaceContent(String value, int start, int end) {
+		this.replaceContent(value, start, end, false);
+	}
+	
+	@Override
+	public void replaceContent(String value, int start, int end, boolean no_indent) {
 		try {
-			
 			// Indent string
-			value = EditorUtilities.stringIndent(value, this.getIndentation()).trim();
+			if (!no_indent) {
+				value = EditorUtilities.stringIndent(value, this.getIndentation()).trim();
+			}
 
 			// Expand TAB to SPACES if required
 			if (IndentUtils.isExpandTabs(this.doc)) {
@@ -114,18 +125,14 @@ public class ZenEditor implements IZenEditor {
 			}
 
 			// Manage placeholder
-			int placeholderPosition = value.length();
-			if (value.contains(ZenEditor.caretPlaceholder)) {
-				placeholderPosition = value.indexOf(ZenEditor.caretPlaceholder);
-				value = value.replace(ZenEditor.caretPlaceholder, ""); }
+			Emmet emmet = Emmet.getSingleton();
+			value = Context.toString(emmet.execJSFunction("nbTransformTabstops", value));
+			CodeTemplate ct = CodeTemplateManager.get(this.doc).createTemporary(value);
 
 			// Replace content
 			this.doc.remove(start, end - start);
-			this.doc.insertString(start, value, null);
-
-			// Move caret
-			this.setCaretPos(start + placeholderPosition);
-
+			setCaretPos(start);
+			ct.insert(textComp);
 		} catch (BadLocationException ex) {
 			ex.printStackTrace(OutputUtils.getErrorStream());
 		}
@@ -140,31 +147,57 @@ public class ZenEditor implements IZenEditor {
 			return "";
 		}
 	}
+	
+	private boolean matchesSyntax(Object... vargs) {
+		String ct = this.getContentType();
+		for (int i = 0; i < vargs.length; i++) {
+			if (ct.equals(vargs[i])) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	@Override
 	public String getSyntax() {
 		// NetBeans returns content type as 'text/x-css' before version 7.3 beta and returns 'text/css' from 7.3 beta
-		if (this.getContentType().equals("text/x-css") || this.getContentType().equals("text/css")) return "css";
-		if (this.getContentType().equals("text/x-scss") || this.getContentType().equals("text/scss")) return "scss";
-		if (this.getContentType().equals("text/x-sass") || this.getContentType().equals("text/sass")) return "sass";
-		if (this.getContentType().equals("text/x-lesscss") || this.getContentType().equals("text/lesscss")) return "less";
-		return "html";
+		String syntax = "html";
+		
+		if (matchesSyntax("text/x-css", "text/css")) {
+			syntax = "css";
+		} else if (matchesSyntax("text/x-scss", "text/scss")) {
+			syntax = "scss";
+		} else if (matchesSyntax("text/x-sass", "text/sass")) {
+			syntax = "sass";
+		} else if (matchesSyntax("text/x-lesscss", "text/lesscss")) {
+			syntax = "less";
+		} else {
+			String[] knownSyntaxes = {"haml", "xsl", "styl", "stylus"};
+			String ct = getContentType();
+
+			for (String s : knownSyntaxes) {
+				if (ct.indexOf(s) != -1) {
+					syntax = s;
+					break;
+				}
+			}
+		}
+		
+		Emmet emmet = Emmet.getSingleton();
+		return Context.toString(emmet.execJSFunction("javaDetectSyntax", this, syntax));
 	}
 
 	@Override
 	public String getProfileName() {
-		// NetBeans returns content type as 'text/x-css' before version 7.3 beta and returns 'text/css' from 7.3 beta
-		if (this.getContentType().equals("text/x-css") || this.getContentType().equals("text/css")) return "css";
-		if (this.getContentType().equals("text/x-scss") || this.getContentType().equals("text/scss")) return "scss";
-		if (this.getContentType().equals("text/x-sass") || this.getContentType().equals("text/sass")) return "sass";
-		if (this.getContentType().equals("text/x-lesscss") || this.getContentType().equals("text/lesscss")) return "less";
-		return "xhtml";
+		Emmet emmet = Emmet.getSingleton();
+		return Context.toString(emmet.execJSFunction("javaDetectProfile", this));
 	}
 
 	@Override
 	public String prompt(String title) {
 		String response = JOptionPane.showInputDialog(null,
-			"Enter Zen Coding abbreviation:",
+			title,
 			"Wrap with Abbreviation",
 			JOptionPane.QUESTION_MESSAGE);
 		if (response == null) return "";
@@ -178,7 +211,8 @@ public class ZenEditor implements IZenEditor {
 
 	@Override
 	public String getFilePath() {
-		return "local";
+		File file = FileUtil.toFile(NbEditorUtilities.getFileObject(this.doc));
+		return file.getAbsolutePath();
 	}
 
 	private void setup() throws ZenEditorException {
@@ -252,7 +286,7 @@ public class ZenEditor implements IZenEditor {
 			doc.insertString(lineStart, replacement, null);
 			lineEnd = lineStart + replacement.length();
 		} catch (BadLocationException ex) {
-			return;
+			
 		}
 	}
 

@@ -1,4 +1,5 @@
-package ru.zencoding;
+package io.emmet;
+
 
 public class TabStop {
 	private int start = 0;
@@ -27,5 +28,9 @@ public class TabStop {
 	
 	public boolean isZeroWidth() {
 		return start == end;
+	}
+
+	public int getLength() {
+		return end - start;
 	}
 }

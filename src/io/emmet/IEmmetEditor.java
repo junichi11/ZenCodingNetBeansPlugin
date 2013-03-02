@@ -1,18 +1,18 @@
-package ru.zencoding;
+package io.emmet;
 
 /**
- * Zen Coding editor interface that should be implemented in order to
- * run Zen Coding actions
+ * Emmet editor interface that should be implemented in order to
+ * run Emmet actions
  * @author Sergey Chikuyonok
  */
-public interface IZenEditor {
+public interface IEmmetEditor {
 	/**
 	 * Returns character indexes of selected text: object with <code>start</code>
 	 * and <code>end</code> indexes. If there's no selection, should return 
 	 * list with both indexes referring to current caret position
 	 * @example
 	 * <pre>
-	 * SelectionData selection = zen_editor.getSelectionRange();
+	 * SelectionData selection = editor.getSelectionRange();
 	 * System.out.println(selection.getStart() + ", " + selection.getEnd());
 	 * </pre> 
 	 */
@@ -22,7 +22,7 @@ public interface IZenEditor {
 	 * Creates selection from <code>start</code> to <code>end</code> character
 	 * indexes.
 	 * @example
-	 * <pre>zen_editor.createSelection(10, 40);</pre>
+	 * <pre>editor.createSelection(10, 40);</pre>
 	 */
 	public void createSelection(int start, int end);
 	
@@ -32,7 +32,7 @@ public interface IZenEditor {
 	 * @return {Object}
 	 * @example
 	 * <pre>
-	 * SelectionData range = zen_editor.getCurrentLineRange();
+	 * SelectionData range = editor.getCurrentLineRange();
 	 * System.out.println(range.getStart() + ", " + range.getEnd();
 	 * </pre>
 	 */
@@ -84,6 +84,19 @@ public interface IZenEditor {
 	public void replaceContent(String value, int start, int end);
 	
 	/**
+	 * Replace editor's content part (from <code>start</code> to 
+	 * <code>end</code> index) with <code>value</code>. If <code>value</code> 
+	 * contains <code>caret_placeholder</code>, the editor will put caret into 
+	 * this position.  
+	 *  
+	 * @param value Content you want to paste
+	 * @param start Start index of editor's content
+	 * @param end End index of editor's content
+	 * @param no_indent Do not indent pasted value
+	 */
+	public void replaceContent(String value, int start, int end, boolean no_indent);
+	
+	/**
 	 * Returns editor's content
 	 */
 	public String getContent();
@@ -94,7 +107,7 @@ public interface IZenEditor {
 	public String getSyntax();
 	
 	/**
-	 * Returns current output profile name (@see zen_coding#setupProfile)
+	 * Returns current output profile name
 	 */
 	public String getProfileName();
 	
