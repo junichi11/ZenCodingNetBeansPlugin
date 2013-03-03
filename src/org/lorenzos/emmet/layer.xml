@@ -2,7 +2,7 @@
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
 <filesystem>
     <folder name="Actions">
-		<folder name="Basic">
+		<folder name="Emmet Basic">
 			<file name="org-lorenzos-emmet-actions-EmmetExpandAbbreviation.instance">
                 <attr name="delegate" methodvalue="org.openide.awt.Actions.inject"/>
                 <attr name="displayName" bundlevalue="org.lorenzos.emmet.actions.Bundle#CTL_EmmetExpandAbbreviation"/>
@@ -104,7 +104,7 @@
 				<attr name="type" stringvalue="org.openide.cookies.EditorCookie"/>
 			</file>
 		</folder>
-        <folder name="HTML">
+        <folder name="Emmet HTML">
             <file name="org-lorenzos-emmet-actions-EmmetMatchPair.instance">
                 <attr name="delegate" methodvalue="org.openide.awt.Actions.inject"/>
                 <attr name="displayName" bundlevalue="org.lorenzos.emmet.actions.Bundle#CTL_EmmetMatchPair"/>
@@ -154,7 +154,7 @@
 				<attr name="type" stringvalue="org.openide.cookies.EditorCookie"/>
 			</file>
         </folder>
-		<folder name="Numbers">
+		<folder name="Emmet Numbers">
 			<file name="org-lorenzos-emmet-actions-EmmetEvaluateMathExpression.instance">
 				<attr name="delegate" methodvalue="org.openide.awt.Actions.inject"/>
 				<attr name="displayName" bundlevalue="org.lorenzos.emmet.actions.Bundle#CTL_EmmetEvaluateMathExpression"/>
@@ -219,7 +219,7 @@
 				<attr name="type" stringvalue="org.openide.cookies.EditorCookie"/>
 			</file>
 		</folder>
-		<folder name="CSS">
+		<folder name="Emmet CSS">
 			<file name="org-lorenzos-emmet-actions-EmmetReflectValue.instance">
 				<attr name="delegate" methodvalue="org.openide.awt.Actions.inject"/>
 				<attr name="displayName" bundlevalue="org.lorenzos.emmet.actions.Bundle#CTL_EmmetReflectValue"/>
@@ -247,109 +247,109 @@
 				
 				<folder name="HTML">
 					<file name="org-lorenzos-emmet-actions-EmmetMatchPair.shadow">
-						<attr name="originalFile" stringvalue="Actions/HTML/org-lorenzos-emmet-actions-EmmetMatchPair.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet HTML/org-lorenzos-emmet-actions-EmmetMatchPair.instance"/>
 						<attr name="position" intvalue="1"/>
 					</file>
 					<file name="org-lorenzos-emmet-actions-EmmetMatchPairInward.shadow">
-						<attr name="originalFile" stringvalue="Actions/HTML/org-lorenzos-emmet-actions-EmmetMatchPairInward.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet HTML/org-lorenzos-emmet-actions-EmmetMatchPairInward.instance"/>
 						<attr name="position" intvalue="2"/>
 					</file>
 					<file name="org-lorenzos-emmet-actions-EmmetGoToMatchingPair.shadow">
-						<attr name="originalFile" stringvalue="Actions/HTML/org-lorenzos-emmet-actions-EmmetGoToMatchingPair.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet HTML/org-lorenzos-emmet-actions-EmmetGoToMatchingPair.instance"/>
 						<attr name="position" intvalue="3"/>
 					</file>
 					<file name="org-lorenzos-emmet-actions-EmmetRemoveTag.shadow">
-						<attr name="originalFile" stringvalue="Actions/HTML/org-lorenzos-emmet-actions-EmmetRemoveTag.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet HTML/org-lorenzos-emmet-actions-EmmetRemoveTag.instance"/>
 						<attr name="position" intvalue="4"/>
 					</file>
 					<file name="org-lorenzos-emmet-actions-EmmetSplitJoinTag.shadow">
-						<attr name="originalFile" stringvalue="Actions/HTML/org-lorenzos-emmet-actions-EmmetSplitJoinTag.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet HTML/org-lorenzos-emmet-actions-EmmetSplitJoinTag.instance"/>
 						<attr name="position" intvalue="5"/>
 					</file>
 				</folder>
 				<folder name="CSS">
 					<file name="org-lorenzos-emmet-actions-EmmetReflectValue.shadow">
-						<attr name="originalFile" stringvalue="Actions/CSS/org-lorenzos-emmet-actions-EmmetReflectValue.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet CSS/org-lorenzos-emmet-actions-EmmetReflectValue.instance"/>
 						<attr name="position" intvalue="1"/>
 					</file>
 				</folder>
 				<folder name="Numbers">
 					<file name="org-lorenzos-emmet-actions-EmmetEvaluateMathExpression.shadow">
-						<attr name="originalFile" stringvalue="Actions/Numbers/org-lorenzos-emmet-actions-EmmetEvaluateMathExpression.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet Numbers/org-lorenzos-emmet-actions-EmmetEvaluateMathExpression.instance"/>
 						<attr name="position" intvalue="1"/>
 					</file>
 					<file name="org-lorenzos-emmet-actions-EmmetIncrementBy1.shadow">
-						<attr name="originalFile" stringvalue="Actions/Numbers/org-lorenzos-emmet-actions-EmmetIncrementBy1.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet Numbers/org-lorenzos-emmet-actions-EmmetIncrementBy1.instance"/>
 						<attr name="position" intvalue="2"/>
 					</file>
 					<file name="org-lorenzos-emmet-actions-EmmetDecrementBy1.shadow">
-						<attr name="originalFile" stringvalue="Actions/Numbers/org-lorenzos-emmet-actions-EmmetDecrementBy1.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet Numbers/org-lorenzos-emmet-actions-EmmetDecrementBy1.instance"/>
 						<attr name="position" intvalue="3"/>
 					</file>
 					<file name="org-lorenzos-emmet-actions-EmmetIncrementBy10.shadow">
-						<attr name="originalFile" stringvalue="Actions/Numbers/org-lorenzos-emmet-actions-EmmetIncrementBy10.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet Numbers/org-lorenzos-emmet-actions-EmmetIncrementBy10.instance"/>
 						<attr name="position" intvalue="4"/>
 					</file>
 					<file name="org-lorenzos-emmet-actions-EmmetDecrementBy10.shadow">
-						<attr name="originalFile" stringvalue="Actions/Numbers/org-lorenzos-emmet-actions-EmmetDecrementBy10.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet Numbers/org-lorenzos-emmet-actions-EmmetDecrementBy10.instance"/>
 						<attr name="position" intvalue="5"/>
 					</file>
 					<file name="org-lorenzos-emmet-actions-EmmetIncrementBy01.shadow">
-						<attr name="originalFile" stringvalue="Actions/Numbers/org-lorenzos-emmet-actions-EmmetIncrementBy01.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet Numbers/org-lorenzos-emmet-actions-EmmetIncrementBy01.instance"/>
 						<attr name="position" intvalue="6"/>
 					</file>
 					<file name="org-lorenzos-emmet-actions-EmmetDecrementBy01.shadow">
-						<attr name="originalFile" stringvalue="Actions/Numbers/org-lorenzos-emmet-actions-EmmetDecrementBy01.instance"/>
+						<attr name="originalFile" stringvalue="Actions/Emmet Numbers/org-lorenzos-emmet-actions-EmmetDecrementBy01.instance"/>
 						<attr name="position" intvalue="7"/>
 					</file>
 				</folder>
 				
 				
 				<file name="org-lorenzos-emmet-actions-EmmetExpandAbbreviation.shadow">
-					<attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetExpandAbbreviation.instance"/>
+					<attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetExpandAbbreviation.instance"/>
 					<attr name="position" intvalue="4"/>
 				</file>
 				
 				<file name="org-lorenzos-emmet-actions-EmmetWrapWithAbbreviation.shadow">
-					<attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetWrapWithAbbreviation.instance"/>
+					<attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetWrapWithAbbreviation.instance"/>
 					<attr name="position" intvalue="5"/>
 				</file>
 				
 				<file name="org-lorenzos-emmet-actions-EmmetToggleComment.shadow">
-					<attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetToggleComment.instance"/>
+					<attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetToggleComment.instance"/>
 					<attr name="position" intvalue="6"/>
 				</file>
 				
 				<file name="org-lorenzos-emmet-actions-EmmetGoToNextEditPoint.shadow">
-					<attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetGoToNextEditPoint.instance"/>
+					<attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetGoToNextEditPoint.instance"/>
 					<attr name="position" intvalue="7"/>
 				</file>
 				<file name="org-lorenzos-emmet-actions-EmmetGoToPreviousEditPoint.shadow">
-					<attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetGoToPreviousEditPoint.instance"/>
+					<attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetGoToPreviousEditPoint.instance"/>
 					<attr name="position" intvalue="8"/>
 				</file>
 				
 				<file name="org-lorenzos-emmet-actions-EmmetSelectNextItem.shadow">
-					<attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetSelectNextItem.instance"/>
+					<attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetSelectNextItem.instance"/>
 					<attr name="position" intvalue="9"/>
 				</file>
 				<file name="org-lorenzos-emmet-actions-EmmetSelectPreviousItem.shadow">
-					<attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetSelectPreviousItem.instance"/>
+					<attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetSelectPreviousItem.instance"/>
 					<attr name="position" intvalue="10"/>
 				</file>
 				
 				<file name="org-lorenzos-emmet-actions-EmmetMergeLines.shadow">
-					<attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetMergeLines.instance"/>
+					<attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetMergeLines.instance"/>
 					<attr name="position" intvalue="11"/>
 				</file>
 				
 				<file name="org-lorenzos-emmet-actions-EmmetEncodeDecodeDataURL.shadow">
-					<attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetEncodeDecodeDataURL.instance"/>
+					<attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetEncodeDecodeDataURL.instance"/>
 					<attr name="position" intvalue="12"/>
 				</file>
 				
 				<file name="org-lorenzos-emmet-actions-EmmetUpdateImageSize.shadow">
-					<attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetUpdateImageSize.instance"/>
+					<attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetUpdateImageSize.instance"/>
 					<attr name="position" intvalue="13"/>
 				</file>
 			</folder>
@@ -361,16 +361,16 @@
     </folder>
 	<folder name="Shortcuts">
         <file name="D-O-N.shadow">
-            <attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetExpandAbbreviation.instance"/>
+            <attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetExpandAbbreviation.instance"/>
         </file>
         <file name="D-O-M.shadow">
-            <attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetMatchPair.instance"/>
+            <attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetMatchPair.instance"/>
         </file>
         <file name="D-O-W.shadow">
-            <attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetWrapWithAbbreviation.instance"/>
+            <attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetWrapWithAbbreviation.instance"/>
         </file>
         <file name="D-O-L.shadow">
-            <attr name="originalFile" stringvalue="Actions/Basic/org-lorenzos-emmet-actions-EmmetMergeLines.instance"/>
+            <attr name="originalFile" stringvalue="Actions/Emmet Basic/org-lorenzos-emmet-actions-EmmetMergeLines.instance"/>
         </file>
     </folder>
 </filesystem>
