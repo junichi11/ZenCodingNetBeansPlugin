@@ -206,7 +206,11 @@ public class EmmetEditor implements IEmmetEditor {
 
 	@Override
 	public String getSelection() {
-		return this.textComp.getSelectedText();
+		String sel = this.textComp.getSelectedText();
+		if (sel == null) {
+			sel = "";
+		}
+		return sel;
 	}
 
 	@Override
