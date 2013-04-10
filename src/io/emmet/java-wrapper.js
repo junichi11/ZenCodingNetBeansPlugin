@@ -185,7 +185,7 @@ function nbTransformTabstops(text) {
 	return require('tabStops').processText(text, {
 		tabstop: function(data) {
 			if (data.group == caretBase) {
-				return '${cursor}';
+				return '${' + data.group + ' default=""}${cursor}';
 			}
 
 			return '${' + data.group + ' default="' + (data.placeholder || '') + '"}';

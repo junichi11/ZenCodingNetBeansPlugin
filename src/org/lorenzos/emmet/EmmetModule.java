@@ -15,6 +15,7 @@ public class EmmetModule extends ModuleInstall {
 		
 		Preferences prefs = NbPreferences.forModule(EmmetPanel.class);
 		prefs.addPreferenceChangeListener(new PreferenceChangeListener() {
+			@Override
 			public void preferenceChange(PreferenceChangeEvent evt) {
 				if (evt.getKey().equals("extPath")) {
 					Emmet.reset();
