@@ -4,7 +4,8 @@
     <folder name="Actions">
 		<folder name="Emmet Basic">
 			
-			<file name="org-lorenzos-emmet-actions-EmmetExpandAbbreviation.instance">
+			<file name="org-lorenzos-emmet-actions-ActionsFactory.instance_hidden"/>
+            <file name="org-lorenzos-emmet-actions-EmmetExpandAbbreviation.instance">
                 <attr name="delegate" methodvalue="org.openide.awt.Actions.inject"/>
                 <attr name="displayName" bundlevalue="org.lorenzos.emmet.actions.Bundle#CTL_EmmetExpandAbbreviation"/>
                 <attr name="injectable" stringvalue="org.lorenzos.emmet.actions.EmmetExpandAbbreviation"/>
