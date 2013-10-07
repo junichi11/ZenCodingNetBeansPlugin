@@ -27,6 +27,25 @@ import org.openide.filesystems.FileUtil;
 
 public class EmmetEditor implements IEmmetEditor {
 
+	private static final String MIME_XCSS = "text/x-css";
+	private static final String MIME_CSS = "text/css";
+	private static final String MIME_LESS = "text/less";
+	private static final String MIME_XLESSCSS = "text/x-lesscss";
+	private static final String MIME_LESSCSS = "text/lesscss";
+	private static final String MIME_XSASS = "text/x-sass";
+	private static final String MIME_SASS = "text/sass";
+	private static final String MIME_XSCSS = "text/x-scss";
+	private static final String MIME_SCSS = "text/scss";
+	private static final String SYNTAX_CSS = "css";
+	private static final String SYNTAX_HAML = "haml";
+	private static final String SYNTAX_HTML = "html";
+	private static final String SYNTAX_LESS = "less";
+	private static final String SYNTAX_SASS = "sass";
+	private static final String SYNTAX_SCSS = "scss";
+	private static final String SYNTAX_STYL = "styl";
+	private static final String SYNTAX_STYLUS = "stylus";
+	private static final String SYNTAX_XSL = "xsl";
+
 	private JTextComponent textComp;
 	private Document doc;
 	private String contentType;
@@ -162,18 +181,17 @@ public class EmmetEditor implements IEmmetEditor {
 	@Override
 	public String getSyntax() {
 		// NetBeans returns content type as 'text/x-css' before version 7.3 beta and returns 'text/css' from 7.3 beta
-		String syntax = "html";
-		
-		if (matchesSyntax("text/x-css", "text/css")) {
-			syntax = "css";
-		} else if (matchesSyntax("text/x-scss", "text/scss")) {
-			syntax = "scss";
-		} else if (matchesSyntax("text/x-sass", "text/sass")) {
-			syntax = "sass";
-		} else if (matchesSyntax("text/x-lesscss", "text/lesscss")) {
-			syntax = "less";
+		String syntax = SYNTAX_HTML;
+		if (matchesSyntax(MIME_XCSS, MIME_CSS)) {
+			syntax = SYNTAX_CSS;
+		} else if (matchesSyntax(MIME_XSCSS, MIME_SCSS)) {
+			syntax = SYNTAX_SCSS;
+		} else if (matchesSyntax(MIME_XSASS, MIME_SASS)) {
+			syntax = SYNTAX_SASS;
+		} else if (matchesSyntax(MIME_LESS, MIME_XLESSCSS, MIME_LESSCSS)) {
+			syntax = SYNTAX_LESS;
 		} else {
-			String[] knownSyntaxes = {"haml", "xsl", "styl", "stylus"};
+			String[] knownSyntaxes = {SYNTAX_HAML, SYNTAX_XSL, SYNTAX_STYL, SYNTAX_STYLUS};
 			String ct = getContentType();
 
 			for (String s : knownSyntaxes) {
@@ -239,6 +257,9 @@ public class EmmetEditor implements IEmmetEditor {
 					tokenSequence.move(this.caretPosition - 1);
 					if (tokenSequence.moveNext()) {
 						this.setContentType(tokenSequence.language().mimeType());
+						if(matchesSyntax(MIME_SCSS, MIME_XSCSS, MIME_LESS, MIME_LESSCSS, MIME_XLESSCSS, MIME_SASS, MIME_XSASS)){
+							break;
+						}
 						tokenSequence = tokenSequence.embedded();
 					} else {
 						tokenSequence = null;
