@@ -257,6 +257,9 @@ public class EmmetEditor implements IEmmetEditor {
 					tokenSequence.move(this.caretPosition - 1);
 					if (tokenSequence.moveNext()) {
 						this.setContentType(tokenSequence.language().mimeType());
+						if(matchesSyntax(MIME_SCSS, MIME_XSCSS, MIME_LESS, MIME_LESSCSS, MIME_XLESSCSS, MIME_SASS, MIME_XSASS)){
+							break;
+						}
 						tokenSequence = tokenSequence.embedded();
 					} else {
 						tokenSequence = null;
