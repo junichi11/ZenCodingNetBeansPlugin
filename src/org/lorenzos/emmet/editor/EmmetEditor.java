@@ -24,6 +24,8 @@ import org.netbeans.lib.editor.codetemplates.api.CodeTemplate;
 import org.mozilla.javascript.Context;
 import org.netbeans.modules.editor.NbEditorUtilities;
 import org.openide.filesystems.FileUtil;
+import org.openide.text.NbDocument;
+import org.openide.util.Exceptions;
 
 public class EmmetEditor implements IEmmetEditor {
 
@@ -129,8 +131,7 @@ public class EmmetEditor implements IEmmetEditor {
 	}
 	
 	@Override
-	public void replaceContent(String value, int start, int end, boolean no_indent) {
-		try {
+	public void replaceContent(String value, final int start, final int end, boolean no_indent) {
 			// Indent string
 			if (!no_indent) {
 				value = EditorUtilities.stringIndent(value, this.getIndentation()).trim();
@@ -148,13 +149,21 @@ public class EmmetEditor implements IEmmetEditor {
 			value = Context.toString(emmet.execJSFunction("nbTransformTabstops", value));
 			CodeTemplate ct = CodeTemplateManager.get(this.doc).createTemporary(value);
 
-			// Replace content
-			this.doc.remove(start, end - start);
-			setCaretPos(start);
-			ct.insert(textComp);
-		} catch (BadLocationException ex) {
-			ex.printStackTrace(OutputUtils.getErrorStream());
-		}
+		// see #3
+		StyledDocument styledDocument = (StyledDocument) this.doc;
+		NbDocument.runAtomic(styledDocument, new Runnable() {
+			@Override
+			public void run() {
+				try {
+					EmmetEditor.this.doc.remove(start, end - start);
+				} catch (BadLocationException ex) {
+					Exceptions.printStackTrace(ex);
+				}
+			}
+		});
+		// Replace content
+		setCaretPos(start);
+		ct.insert(textComp);
 	}
 
 	@Override
@@ -304,15 +313,22 @@ public class EmmetEditor implements IEmmetEditor {
 		}
 	}
 
-	public void replaceLine(String replacement) {
-		try {
-			int offset = lineEnd - lineStart;
-			doc.remove(lineStart, offset);
-			doc.insertString(lineStart, replacement, null);
-			lineEnd = lineStart + replacement.length();
-		} catch (BadLocationException ex) {
-			
-		}
+	public void replaceLine(final String replacement) {
+		// see #3
+		StyledDocument styledDocument = (StyledDocument) this.doc;
+		NbDocument.runAtomic(styledDocument, new Runnable() {
+			@Override
+			public void run() {
+				try {
+					int offset = lineEnd - lineStart;
+					doc.remove(lineStart, offset);
+					doc.insertString(lineStart, replacement, null);
+					lineEnd = lineStart + replacement.length();
+				} catch (BadLocationException ex) {
+					Exceptions.printStackTrace(ex);
+				}
+			}
+		});
 	}
 
 	public String getIndentation() {
