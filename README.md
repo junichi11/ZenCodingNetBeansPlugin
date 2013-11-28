@@ -12,11 +12,11 @@ When installed, check out `Edit > Emmet` menu item for available actions.
 
 ## Keyboard shortcuts
 
-By default, plugin has almost no shortcuts. To bind keyboard shortcuts to Emmet actions or change existing ones, go to `Preferences > Keymap`. For your convenience, all Emmet actions are grouped under `Emmet` categories.
+By default, plugin has almost no shortcuts. To bind keyboard shortcuts to Emmet actions or change existing ones, go to `Tools > Options > Keymap`. For your convenience, all Emmet actions are grouped under `Emmet` categories.
 
 ## Extensions support
 
-This plugin supports [Emmet extensions](http://docs.emmet.io/customization/). Go to `Preferences > Miscellaneous > Emmet` tab and pick folder with your extensions.
+This plugin supports [Emmet extensions](http://docs.emmet.io/customization/). Go to `Tools > Options > Miscellaneous > Emmet` tab and pick folder with your extensions.
 
 ## Credits
 
