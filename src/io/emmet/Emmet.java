@@ -2,6 +2,7 @@ package io.emmet;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
@@ -68,9 +69,9 @@ public class Emmet {
 		singleton = null;
 	}
 	
-	private InputStreamReader getReaderForLocalFile(String fileName) {
+	private InputStreamReader getReaderForLocalFile(String fileName) throws UnsupportedEncodingException {
 		InputStream is = this.getClass().getResourceAsStream(fileName);
-		return new InputStreamReader(is);
+		return new InputStreamReader(is, "UTF-8");
 	}
 	
 	private String readLocalFile(String fileName) {
