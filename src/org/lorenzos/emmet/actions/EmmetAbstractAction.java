@@ -37,16 +37,11 @@ public abstract class EmmetAbstractAction implements ActionListener {
 				final Emmet emmet = Emmet.getSingleton();
 				final EmmetEditor editor = EmmetEditor.create(editorCookie);
 
-				// Create a runnable that run the Zen action
-				final String zenAction = this.action;
-				Runnable runZenAction = new Runnable() {
-					@Override public void run() {
-						emmet.runAction(editor, zenAction);
-					}
-				};
-
-				// Run it in an atomic Undo/Redo
-				NbDocument.runAtomic(editor.getDocument(), runZenAction);
+				// CodeTemplate.insert is called within NbDocument.runAtomic.
+				// So, move it into EmmetEditor.
+				// Unfortunately, Undo/Redo behavior are changed.
+				// see: #3
+				emmet.runAction(editor, this.action);
 
 				// Restore scrolling position
 				editor.restoreInitialScrollingPosition();
